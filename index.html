@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <title>サンプル</title>
+</head>
+
+<body>
+
+    <p>銘柄コード→各種URLに変換</p>
+
+    <label>銘柄コード：<input type="text" id="Stock_Code"></label>
+
+    <div id="url_list">
+    </div>
+
+    <script>
+
+        //URLのリスト
+        let List = [
+            ['株探', 'https://kabutan.jp/stock/?code=', ''],
+            ['四季報', 'https://shikiho.jp/stocks/', '/'],
+            ['バフェットコード', 'https://www.buffett-code.com/company/', '/'],
+            ['株予報Pro', 'https://kabuyoho.jp/reportTop?bcode=', '']
+
+        ];
+
+
+        function inputChange(array_list) {
+            // イベントが発生した時の処理
+            //StockCodeを取得
+            let url_link = "";
+
+            let Stock_Code = event.currentTarget.value;
+
+            List.forEach(function (array_list) {
+
+                console.log(array_list);
+                //URLを作成
+                let url = array_list[1] + Stock_Code + array_list[2];
+                url_link += '<p><a href="' + url + '" target="_blank" rel="noopener noreferrer">' + url + '</a></p>';
+
+            });
+
+            url_list.innerHTML = url_link;
+
+        }
+
+        let text_change = document.getElementById('Stock_Code');
+        text_change.addEventListener('input', inputChange);
+    </script>
+
+</html>
